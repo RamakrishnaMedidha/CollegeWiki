@@ -1,0 +1,48 @@
+
+
+    If you have Debian OS installed in your system, type su and press enter it will prompt for password, enter your root password
+
+    Update package sources
+
+apt-get update
+
+(This is safer than apt-get upgrade or apt-get dist-upgrade, because it safely upgrades your server and resolves dependencies)
+
+    Install Apache2 and PHP5
+
+apt-get install apache2 php5 libapache2-mod-php5 php5-gd
+chmod -R 777 /var/www
+
+Check if apache is working
+
+/etc/init.d/apache2 restart
+nano /var/www/info.php
+
+Copy & paste the folowing php code in the nano editor
+
+<?php
+phpinfo();
+?>
+
+Go and check http://localhost/info.php in your browser to see configuration of installed php version.
+
+    Install Mysql and PHPmyadmin
+
+apt-get install mysql-server mysql-client php5-mysql
+apt-get install phpmyadmin
+
+When prompted for a password enter hello.
+
+    Creating a MySQL DB & user for your Drupal installation
+
+mysqladmin -u root -p create d7
+
+Enter hello when you are prompted for password. If you get a “Database exists” error, please issue “mysqladmin -u root -p drop d7” to delete the existing database and then issue the create command.
+
+    Configuring Apache for Clean URLs
+
+a2enmod rewrite
+/etc/init.d/apache2 restart
+chmod -R 777 /var/www
+
+I
